@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo do Tigrinho</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="history">
+        <h2>Histórico de Resultados</h2>
+        <ul id="results"></ul>
+      </div>
+      <div class="slot-machine">
+        <div class="reel" id="reel1"></div>
+        <div class="reel" id="reel2"></div>
+        <div class="reel" id="reel3"></div>
+        <div class="reel" id="reel4"></div>
+        <!-- Nova fileira -->
+      </div>
+    </div>
+
+    <div id="fireworks"></div>
+
+    <input type="checkbox" id="forceWinCheckbox" />
+    <label for="forceWinCheckbox">Forçar Vitória</label>
+
+    <button id="spinButton">Girar</button>
+    <label for="spinCount">Número de giros automáticos:</label>
+    <input
+      type="range"
+      id="spinCount"
+      name="spinCount"
+      min="1"
+      max="10"
+      value="1"
+    />
+    <span id="spinCountValue">1</span>
+
+    <script src="script.js"></script>
+  </body>
+</html>

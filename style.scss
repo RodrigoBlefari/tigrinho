@@ -1,0 +1,187 @@
+$reel-width: 120px;
+$reel-height: 350px;
+$reel-border-color: #fff;
+$reel-background-color: #222;
+
+$number-width: 100%;
+$number-height: 25%;
+$number-background-color: #444;
+$number-border-radius: 5px;
+$number-box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+
+$spin-animation-duration: 1s;
+$spin-animation-steps: 10;
+
+$winning-color: green;
+$losing-color: red;
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.history {
+    width: 300px;
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #fff;
+    padding: 10px;
+    margin-right: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.history h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.history ul#results {
+    list-style-type: none;
+    padding: 0;
+}
+
+.history ul#results li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.history ul#results li.win {
+    border-color: $winning-color;
+}
+
+.history ul#results li.lose {
+    border-color: $losing-color;
+}
+
+.slot-machine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .reel {
+        width: $reel-width;
+        height: $reel-height;
+        border: 2px solid $reel-border-color;
+        overflow: hidden;
+        position: relative;
+        margin: 0 10px;
+        background-color: $reel-background-color;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        transform-style: preserve-3d;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            pointer-events: none;
+            background: linear-gradient(
+                to bottom,
+                rgba(34, 34, 34, 1),
+                rgba(34, 34, 34, 0) 50%,
+                rgba(34, 34, 34, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        .spin {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin $spin-animation-duration linear infinite;
+        }
+
+        .number {
+            width: $number-width;
+            height: $number-height;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $number-background-color;
+            border-radius: $number-border-radius;
+            box-shadow: $number-box-shadow;
+            color: #fff;
+            font-size: 24px;
+            transition: opacity 0.2s ease-out;
+            transform-style: preserve-3d;
+
+            img {
+                width: 80px;
+                height: 80px;
+                transform: translateZ(20px); // Efeito 3D
+            }
+        }
+
+        &.winner {
+            .number {
+                border: 3px solid $winning-color;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+            }
+            100% {
+                transform: translateY(-300%) rotateX(720deg);
+            }
+        }
+    }
+}
+
+#fireworks {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: explode 1s ease-out infinite;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(10);
+        opacity: 0;
+    }
+}
